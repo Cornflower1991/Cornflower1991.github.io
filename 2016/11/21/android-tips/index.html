@@ -6,17 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: bolg | cornflower1991</title>
+  <title>android-tips | cornflower1991</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hello Word!!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cornflower1991">
-<meta property="og:url" content="http://yoursite.com/tags/bolg/index.html">
+  <meta name="description" content="这里收集了大家常用的一些Android小技巧代码,内容来自自己和自己所遇到的坑。
+
+Resources.getSystem().getDisplayMetrics().density 可以不用 Context 也能获取屏幕密度哦
+通过重载 ViewGroup 的 dispatchDraw 可以实现一个简单的蒙版效果。 例如下拉刷新时，可以在 contentView 上加一层遮罩。 canvas.d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android-tips">
+<meta property="og:url" content="http://yoursite.com/2016/11/21/android-tips/index.html">
 <meta property="og:site_name" content="cornflower1991">
-<meta property="og:description" content="Hello Word!!">
+<meta property="og:description" content="这里收集了大家常用的一些Android小技巧代码,内容来自自己和自己所遇到的坑。
+
+Resources.getSystem().getDisplayMetrics().density 可以不用 Context 也能获取屏幕密度哦
+通过重载 ViewGroup 的 dispatchDraw 可以实现一个简单的蒙版效果。 例如下拉刷新时，可以在 contentView 上加一层遮罩。 canvas.d">
+<meta property="og:updated_time" content="2016-11-21T09:14:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cornflower1991">
-<meta name="twitter:description" content="Hello Word!!">
+<meta name="twitter:title" content="android-tips">
+<meta name="twitter:description" content="这里收集了大家常用的一些Android小技巧代码,内容来自自己和自己所遇到的坑。
+
+Resources.getSystem().getDisplayMetrics().density 可以不用 Context 也能获取屏幕密度哦
+通过重载 ViewGroup 的 dispatchDraw 可以实现一个简单的蒙版效果。 例如下拉刷新时，可以在 contentView 上加一层遮罩。 canvas.d">
   
   
     <link rel="icon" href="/favicon.png">
@@ -123,54 +133,82 @@
 </nav>
 
       <div class="body-wrap">
+        <article id="post-android-tips" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/11/21/Hello/" class="archive-article-date">
-  	<time datetime="2016-11-21T06:24:42.067Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/11/21/Hello/">Hello</a>
+    <h1 class="article-title" itemprop="name">
+      android-tips
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这里收集了大家常用的一些Android小技巧代码,内容来自自己和自己所遇到的坑。</p>
+<ul>
+<li>Resources.getSystem().getDisplayMetrics().density 可以不用 Context 也能<strong>获取屏幕密度</strong>哦</li>
+<li>通过重载 ViewGroup 的 dispatchDraw 可以实现一个简单的<strong>蒙版效果</strong>。 例如下拉刷新时，可以在 contentView 上加一层遮罩。 canvas.drawRect(0, mContentView.getTranslationY(), getWidth(), getHeight(), mMaskPaint);</li>
+<li>使用 GridView时 android:padding 和 <strong>android:clipToPadding=”false” </strong>配合使用效果更好哦。</li>
+<li><strong>DateUtils</strong>系统提供了关于时间操作的类</li>
+<li>TypedValue.applyDimension() 系统提供的<strong>单位转换</strong>Api</li>
+<li>使用LocalBroadcastManager发送<strong>广播</strong>替代全局广播</li>
+</ul>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2016/11/21/android-tips/" class="archive-article-date">
+  	<time datetime="2016-11-21T08:56:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
+</a>
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bolg/">bolg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随记/">随记</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tips/">tips</a></li></ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
-  
 
-    
+  
+<nav id="article-nav">
+  
+    <a href="/2016/11/21/xposed/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Xposed模块
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/11/21/git使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">git使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
 
 
       </div>
@@ -193,9 +231,9 @@
 		mathjax: false,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",

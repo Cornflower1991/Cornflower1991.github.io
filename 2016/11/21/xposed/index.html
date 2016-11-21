@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>cornflower1991</title>
+  <title>Xposed模块 | cornflower1991</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hello Word!!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cornflower1991">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="IXposedMod接口定义了Xposed模块。但用户不能直接实现这个接口(具体原因参见XposedBridge的main方法)，只能实现作者定义好的四个接口，每个接口用于特定的用途：12345678910//用于修改app的资源文件public interface IXposedHookInitPackageResources extends IXposedMod&amp;#123;&amp;#125;//用于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xposed模块">
+<meta property="og:url" content="http://yoursite.com/2016/11/21/xposed/index.html">
 <meta property="og:site_name" content="cornflower1991">
-<meta property="og:description" content="Hello Word!!">
+<meta property="og:description" content="IXposedMod接口定义了Xposed模块。但用户不能直接实现这个接口(具体原因参见XposedBridge的main方法)，只能实现作者定义好的四个接口，每个接口用于特定的用途：12345678910//用于修改app的资源文件public interface IXposedHookInitPackageResources extends IXposedMod&amp;#123;&amp;#125;//用于">
+<meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161121/172513110.png">
+<meta property="og:updated_time" content="2016-11-21T09:51:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cornflower1991">
-<meta name="twitter:description" content="Hello Word!!">
+<meta name="twitter:title" content="Xposed模块">
+<meta name="twitter:description" content="IXposedMod接口定义了Xposed模块。但用户不能直接实现这个接口(具体原因参见XposedBridge的main方法)，只能实现作者定义好的四个接口，每个接口用于特定的用途：12345678910//用于修改app的资源文件public interface IXposedHookInitPackageResources extends IXposedMod&amp;#123;&amp;#125;//用于">
+<meta name="twitter:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161121/172513110.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -123,9 +126,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-xposed" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-xposed" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -134,8 +135,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/xposed/">Xposed模块</a>
+    <h1 class="article-title" itemprop="name">
+      Xposed模块
     </h1>
   
 
@@ -144,9 +145,59 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>IXposedMod接口定义了Xposed模块。但用户不能直接实现这个接口(具体原因参见XposedBridge的main方法)，只能实现作者定义好的四个接口，每个接口用于特定的用途：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//用于修改app的资源文件</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IXposedHookInitPackageResources</span> <span class="keyword">extends</span> <span class="title">IXposedMod</span></span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">//用于hook应用的代码</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IXposedHookLoadPackage</span> <span class="keyword">extends</span> <span class="title">IXposedMod</span></span>&#123;&#125;</div><div class="line"><span class="comment">//在Zygote初始化时执行</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IXposedHookZygoteInit</span> <span class="keyword">extends</span> <span class="title">IXposedMod</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">/**用于hook基于java的命令行工具(例如pm)。它需要app_process 55版本，还需要在XposedInstaller的data目录下创建一个特殊文件(conf/enable_for_tools)*/</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IXposedHookCmdInit</span> <span class="keyword">extends</span> <span class="title">IXposedMod</span></span>&#123;&#125;</div></pre></td></tr></table></figure></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/11/21/xposed/#more">more >></a>
-        </p>
+<a id="more"></a>
+<p><img src="http://ogzf36bsb.bkt.clouddn.com/blog/20161121/172513110.png" alt="@类加载过程 |center"><br>从上图可以发现Xposed Module的类加载器与要运行Apk的类加载器都继承自PathClassLoader，但它们之间相互独立，每个ClassLoader只用于加载某一特定的apk(dex)，所以在Xposed module中如果要加载apk中的类需要用原应用的ApkClassLoader进行加载。</p>
+<h3 id="Hook过程"><a href="#Hook过程" class="headerlink" title="Hook过程"></a>Hook过程</h3><ul>
+<li><strong>Find:</strong> 通过特定的类加载器加载要hook的类，通过反射找到被hook的成员。</li>
+<li><strong>Hook:</strong> 被hook成员调用前后执行特定的回调方法。</li>
+</ul>
+<p>工具类XposedHelpers提供了一些工具方法来简化find过程；XposedBridge的hook*方法用于处理hook并执行回调。</p>
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">XposedHelpers静态方法</th>
+<th style="text-align:center">-</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">findClass</td>
+<td style="text-align:center">使用classLoader加载class</td>
+</tr>
+<tr>
+<td style="text-align:center">findField*</td>
+<td style="text-align:center">通过反射查找类的数据成员并设置可访问性(setAccessible(true))</td>
+</tr>
+<tr>
+<td style="text-align:center">findMethod*</td>
+<td style="text-align:center">通过反射查找类的成员函数并设置可访问性</td>
+</tr>
+<tr>
+<td style="text-align:center">findConstructor*</td>
+<td style="text-align:center">通过反射查找类的构造函数并设置可访问性</td>
+</tr>
+<tr>
+<td style="text-align:center">setStatic*</td>
+<td style="text-align:center">通过反射设置类静态变量的值</td>
+</tr>
+<tr>
+<td style="text-align:center">set*</td>
+<td style="text-align:center">通过反射设置对象数据成员的值</td>
+</tr>
+<tr>
+<td style="text-align:center">findAndHook*</td>
+<td style="text-align:center">查找并hook</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hook"><a href="#hook" class="headerlink" title="hook"></a>hook</h4><p>XC_MethodHook中定义了回调方法：</p>
+<blockquote>
+<p>beforeHookedMethod(MethodHookParam param)：<br>被hook方法调用前执行，调用param.setResult可以跳过被hook的方法</p>
+<p>afterHookedMethod(MethodHookParam param) ：<br> 被hook方法调用后执行，调用param.setResult更改被hook方法的执行结果。</p>
+</blockquote>
+<p>XC_MethodReplacement继承自XC_MethodHook，通过在beforeHookedMethod中调用param.setResult<strong>实现了方法的替换</strong>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**以beforeHookedMethod为例，如何修改方法返回值*/</span></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">beforeHookedMethod</span><span class="params">(MethodHookParam param)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">		 <span class="comment">//对hook的方法修改后的结果</span></div><div class="line">        Object result = replaceHookedMethod(param);</div><div class="line">        <span class="comment">//设置修改后的结果为原方法（被Hook的函数）的结果返回</span></div><div class="line">        param.setResult(result);</div><div class="line">    &#125; <span class="keyword">catch</span> (Throwable t) &#123;</div><div class="line">        param.setThrowable(t);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>当然还有一些Xposed模版的操作，拷贝jar包，在AndroidManifest.xml中声明相应的mata标签之类的就不一一叙述了。<br><a href="http://repo.xposed.info/module/de.robv.android.xposed.installer" target="_blank" rel="external">Xposed</a></p>
+
       
     </div>
     <div class="article-info article-info-index">
@@ -167,189 +218,25 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-android-tips" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/android-tips/">android-tips</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这里收集了大家常用的一些Android小技巧代码,内容来自自己和自己所遇到的坑。</p>
-<ul>
-<li>Resources.getSystem().getDisplayMetrics().density 可以不用 Context 也能<strong>获取屏幕密度</strong>哦</li>
-<li>通过重载 ViewGroup 的 dispatchDraw 可以实现一个简单的<strong>蒙版效果</strong>。 例如下拉刷新时，可以在 contentView 上加一层遮罩。 canvas.drawRect(0, mContentView.getTranslationY(), getWidth(), getHeight(), mMaskPaint);</li>
-<li>使用 GridView时 android:padding 和 <strong>android:clipToPadding=”false” </strong>配合使用效果更好哦。</li>
-<li><strong>DateUtils</strong>系统提供了关于时间操作的类</li>
-<li>TypedValue.applyDimension() 系统提供的<strong>单位转换</strong>Api</li>
-<li>使用LocalBroadcastManager发送<strong>广播</strong>替代全局广播</li>
-</ul>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/android-tips/" class="archive-article-date">
-  	<time datetime="2016-11-21T08:56:55.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tips/">tips</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-git使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/git使用/">git使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、git配置"><a href="#一、git配置" class="headerlink" title="一、git配置"></a>一、git配置</h2><blockquote>
-<p>git config<br>git config  –global<br>git config  –system</p>
-</blockquote>
-<p>Git的三个配置文件分别是<strong>版本库级别</strong>的配置文件（/.git/config）、<strong>全局配置文件</strong>（用户主目录下）和<strong>系统级配置文件</strong>（/etc目录下）。这个命令的作用是打开相应的配置文件，并且进行编辑。其中<strong>版本库级别的配置文件的优先级最高</strong>，全局配置文件次之，系统级别配置文件最低。</p>
-<p>在全局空间中添加新的用户</p>
-<blockquote>
-<p>git config –global user.name “xxx”<br>git config –global user.email xxx@github.com</p>
-</blockquote>
-<p>删除git全局配置文件中的用户名<br>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/11/21/git使用/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/git使用/" class="archive-article-date">
-  	<time datetime="2016-11-21T08:37:14.319Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Hello" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/Hello/">Hello</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>感谢<a href="http://litten.me/" target="_blank" rel="external">Litten</a>大神的主题和提供的帮助，感谢<a href="http://chiahaolu.github.io/" target="_blank" rel="external">陆家豪</a>小伙伴的帮助，这个博客也终于弄好了。</p>
-<p>个人非常喜欢 <strong>Yilia</strong>这个主题的风格。之前都没有用<strong>Markdown</strong>写过博客，感觉语法不熟悉，写起来可能太麻烦，身为一个码农怎么能怕麻烦呢。于是就开始用学习写了，感觉挺好的。</p>
-<p>最近觉得<strong>简书</strong>上的文章还不错，每天都回去上边看看，感谢很舒服。每天都有些文章触动到自己</p>
-<p>后面就会慢慢的把自己以前写的，摘抄的笔记给搬过来。感觉自己有点懒 ，不过我努力的，现在开始学习一些后台的知识，感觉自己只会Android，会的东西太少了，能够做的事也太有限了，得多学习新的东西。</p>
-<p>最后感谢各位大神的开源。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/Hello/" class="archive-article-date">
-  	<time datetime="2016-11-21T06:24:42.067Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bolg/">bolg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随记/">随记</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+<nav id="article-nav">
   
   
+    <a href="/2016/11/21/android-tips/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">android-tips</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+
+
+
 
 
       </div>
@@ -371,8 +258,8 @@
 		fancybox: true,
 		mathjax: false,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
