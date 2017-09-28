@@ -6,17 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>cornflower1991</title>
+  <title>Android中的内存泄露 | cornflower1991</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Hello Word!!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cornflower1991">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Android中的常见内存泄露Android应用程序本身系统分配的内存有限，一旦发生泄漏，程序就会变得卡顿，直至OOM崩溃。简单分析下常见的错误
+非静态内部类会持有外部类的一个隐式引用  Activity是如何泄漏的，只要非静态的匿名类对象没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的内存泄漏。看这个问题之前，我们先回顾下java的内部类1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android中的内存泄露">
+<meta property="og:url" content="http://yoursite.com/2016/11/22/memory leak/index.html">
 <meta property="og:site_name" content="cornflower1991">
-<meta property="og:description" content="Hello Word!!">
+<meta property="og:description" content="Android中的常见内存泄露Android应用程序本身系统分配的内存有限，一旦发生泄漏，程序就会变得卡顿，直至OOM崩溃。简单分析下常见的错误
+非静态内部类会持有外部类的一个隐式引用  Activity是如何泄漏的，只要非静态的匿名类对象没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的内存泄漏。看这个问题之前，我们先回顾下java的内部类1">
+<meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161148890.png">
+<meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161234794.png">
+<meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161348283.png">
+<meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161402738.png">
+<meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161426494.png">
+<meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161633995.png">
+<meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/171011086.png">
+<meta property="og:updated_time" content="2016-11-22T10:47:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cornflower1991">
-<meta name="twitter:description" content="Hello Word!!">
+<meta name="twitter:title" content="Android中的内存泄露">
+<meta name="twitter:description" content="Android中的常见内存泄露Android应用程序本身系统分配的内存有限，一旦发生泄漏，程序就会变得卡顿，直至OOM崩溃。简单分析下常见的错误
+非静态内部类会持有外部类的一个隐式引用  Activity是如何泄漏的，只要非静态的匿名类对象没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的内存泄漏。看这个问题之前，我们先回顾下java的内部类1">
+<meta name="twitter:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161148890.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -123,9 +135,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-Hello" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-memory leak" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -134,122 +144,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/28/Hello/">Hello</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>感谢<a href="http://litten.me/" target="_blank" rel="external">Litten</a>大神的主题和提供的帮助，感谢<a href="http://chiahaolu.github.io/" target="_blank" rel="external">陆家豪</a>小伙伴的帮助，这个博客也终于弄好了。</p>
-<p>个人非常喜欢 <strong>Yilia</strong>这个主题的风格。之前都没有用<strong>Markdown</strong>写过博客，感觉语法不熟悉，写起来可能太麻烦，身为一个码农怎么能怕麻烦呢。于是就开始用学习写了，感觉挺好的。</p>
-<p>最近觉得<strong>简书</strong>上的文章还不错，每天都回去上边看看，感谢很舒服。每天都有些文章触动到自己</p>
-<p>后面就会慢慢的把自己以前写的，摘抄的笔记给搬过来。感觉自己有点懒 ，不过我努力的，现在开始学习一些后台的知识，感觉自己只会Android，会的东西太少了，能够做的事也太有限了，得多学习新的东西。</p>
-<p>最后感谢各位大神的开源。</p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/08/28/Hello/" class="archive-article-date">
-  	<time datetime="2017-08-28T06:42:12.819Z" itemprop="datePublished"><i class="icon-clock"></i>2017-08-28</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bolg/">bolg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随记/">随记</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/28/git/">git使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、git配置"><a href="#一、git配置" class="headerlink" title="一、git配置"></a>一、git配置</h2><blockquote>
-<p>git config<br>git config  –global<br>git config  –system</p>
-</blockquote>
-<p>Git的三个配置文件分别是<strong>版本库级别</strong>的配置文件（/.git/config）、<strong>全局配置文件</strong>（用户主目录下）和<strong>系统级配置文件</strong>（/etc目录下）。这个命令的作用是打开相应的配置文件，并且进行编辑。其中<strong>版本库级别的配置文件的优先级最高</strong>，全局配置文件次之，系统级别配置文件最低。</p>
-<p>在全局空间中添加新的用户</p>
-<blockquote>
-<p>git config –global user.name “xxx”<br>git config –global user.email xxx@github.com</p>
-</blockquote>
-<p>删除git全局配置文件中的用户名<br>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2017/08/28/git/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2017/08/28/git/" class="archive-article-date">
-  	<time datetime="2017-08-28T06:42:12.782Z" itemprop="datePublished"><i class="icon-clock"></i>2017-08-28</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-memory leak" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/22/memory leak/">Android中的内存泄露</a>
+    <h1 class="article-title" itemprop="name">
+      Android中的内存泄露
     </h1>
   
 
@@ -302,126 +198,34 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
   
-    <article id="post-SQLite" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+<nav id="article-nav">
+  
+    <a href="/2017/08/28/git/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/SQLite/">SQLite</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Android上的自带数据库SQLite操作，虽然<code>GreenDao</code>和<code>ORMLite</code>都挺厉害的，封装的也都挺好的。不过本篇文章不是介绍这两个开源库，简单介绍了下Android原生数据库的操作</p>
-<h3 id="数据库基本操作"><a href="#数据库基本操作" class="headerlink" title="数据库基本操作"></a>数据库基本操作</h3><h5 id="1-首先创建数据库类-SQLiteOpenHelper"><a href="#1-首先创建数据库类-SQLiteOpenHelper" class="headerlink" title="1.首先创建数据库类 SQLiteOpenHelper"></a>1.首先创建数据库类 SQLiteOpenHelper</h5><font size="3" color="green">就直接上代码吧</font>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/11/21/SQLite/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/SQLite/" class="archive-article-date">
-  	<time datetime="2016-11-21T09:55:15.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQLite/">SQLite</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sql/">sql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stetho/">stetho</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-xposed" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          git使用
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/xposed/">Xposed模块</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>IXposedMod接口定义了Xposed模块。但用户不能直接实现这个接口(具体原因参见XposedBridge的main方法)，只能实现作者定义好的四个接口，每个接口用于特定的用途：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//用于修改app的资源文件</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IXposedHookInitPackageResources</span> <span class="keyword">extends</span> <span class="title">IXposedMod</span></span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">//用于hook应用的代码</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IXposedHookLoadPackage</span> <span class="keyword">extends</span> <span class="title">IXposedMod</span></span>&#123;&#125;</div><div class="line"><span class="comment">//在Zygote初始化时执行</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IXposedHookZygoteInit</span> <span class="keyword">extends</span> <span class="title">IXposedMod</span> </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">/**用于hook基于java的命令行工具(例如pm)。它需要app_process 55版本，还需要在XposedInstaller的data目录下创建一个特殊文件(conf/enable_for_tools)*/</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IXposedHookCmdInit</span> <span class="keyword">extends</span> <span class="title">IXposedMod</span></span>&#123;&#125;</div></pre></td></tr></table></figure></p>
-        <p class="article-more-link">
-          <a class="article-more-a"  href="/2016/11/21/xposed/#more">more >></a>
-        </p>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/11/21/xposed/" class="archive-article-date">
-  	<time datetime="2016-11-21T09:18:51.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-11-21</time>
-</a>
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hook/">hook</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xposed/">xposed</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xposed模块/">xposed模块</a></li></ul>
-	</div>
-
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
+      </div>
+    </a>
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
+    <a href="/2016/11/21/SQLite/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SQLite</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
+</nav>
+
+
+
+
+
+
+
+
+
 
 
       </div>
@@ -443,8 +247,8 @@
 		fancybox: true,
 		mathjax: false,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
