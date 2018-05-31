@@ -80,13 +80,13 @@
 
 
 <meta name="description" content="Android中的常见内存泄露Android应用程序本身系统分配的内存有限，一旦发生泄漏，程序就会变得卡顿，直至OOM崩溃。简单分析下常见的错误
-非静态内部类会持有外部类的一个隐式引用  Activity是如何泄漏的，只要非静态的匿名类对象没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的内存泄漏。看这个问题之前，我们先回顾下java的内部类1">
+非静态内部类会持有外部类的一个隐式引用  Activity是如何泄漏的，只要非静态的匿名类对象没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的内存泄漏。看这个问题之前，我们先回顾下java的内部类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android中的内存泄露">
 <meta property="og:url" content="http://yoursite.com/2016/11/22/memory leak/index.html">
 <meta property="og:site_name" content="cornflower1991">
 <meta property="og:description" content="Android中的常见内存泄露Android应用程序本身系统分配的内存有限，一旦发生泄漏，程序就会变得卡顿，直至OOM崩溃。简单分析下常见的错误
-非静态内部类会持有外部类的一个隐式引用  Activity是如何泄漏的，只要非静态的匿名类对象没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的内存泄漏。看这个问题之前，我们先回顾下java的内部类1">
+非静态内部类会持有外部类的一个隐式引用  Activity是如何泄漏的，只要非静态的匿名类对象没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的内存泄漏。看这个问题之前，我们先回顾下java的内部类">
 <meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161148890.png">
 <meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161234794.png">
 <meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161348283.png">
@@ -94,11 +94,11 @@
 <meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161426494.png">
 <meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161633995.png">
 <meta property="og:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/171011086.png">
-<meta property="og:updated_time" content="2016-11-22T10:47:06.000Z">
+<meta property="og:updated_time" content="2018-05-31T09:12:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android中的内存泄露">
 <meta name="twitter:description" content="Android中的常见内存泄露Android应用程序本身系统分配的内存有限，一旦发生泄漏，程序就会变得卡顿，直至OOM崩溃。简单分析下常见的错误
-非静态内部类会持有外部类的一个隐式引用  Activity是如何泄漏的，只要非静态的匿名类对象没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的内存泄漏。看这个问题之前，我们先回顾下java的内部类1">
+非静态内部类会持有外部类的一个隐式引用  Activity是如何泄漏的，只要非静态的匿名类对象没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的内存泄漏。看这个问题之前，我们先回顾下java的内部类">
 <meta name="twitter:image" content="http://ogzf36bsb.bkt.clouddn.com/blog/20161122/161148890.png">
 
 
@@ -310,7 +310,7 @@
 
       
         <h4 id="Android中的常见内存泄露"><a href="#Android中的常见内存泄露" class="headerlink" title="Android中的常见内存泄露"></a>Android中的常见内存泄露</h4><p>Android应用程序本身系统分配的内存有限，一旦发生泄漏，程序就会变得卡顿，直至<strong>OOM</strong>崩溃。简单分析下常见的错误</p>
-<h5 id="非静态内部类会持有外部类的一个隐式引用"><a href="#非静态内部类会持有外部类的一个隐式引用" class="headerlink" title="非静态内部类会持有外部类的一个隐式引用"></a>非静态内部类会持有外部类的一个隐式引用</h5><p>  Activity是如何泄漏的，只要<strong>非静态的匿名类对象</strong>没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的<code>内存泄漏</code>。<br>看这个问题之前，我们先回顾下java的<strong>内部类</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outter</span></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Inner c)</span></span>&#123;</div><div class="line">        System.out.println(c);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        Outter o1 = <span class="keyword">new</span> Outter();</div><div class="line">        Outter o2 = <span class="keyword">new</span> Outter();</div><div class="line">        Outter.Inner i1 = o1.new Inner();</div><div class="line">        Outter.Inner i2 = o2.new Inner();</div><div class="line">        o1.foo(i2);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="非静态内部类会持有外部类的一个隐式引用"><a href="#非静态内部类会持有外部类的一个隐式引用" class="headerlink" title="非静态内部类会持有外部类的一个隐式引用"></a>非静态内部类会持有外部类的一个隐式引用</h5><p>  Activity是如何泄漏的，只要<strong>非静态的匿名类对象</strong>没有被回收，Activity就不会被回收，Activity所关联的资源和视图都不会被回收，发生比较严重的<code>内存泄漏</code>。<br>看这个问题之前，我们先回顾下java的<strong>内部类</strong><br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outter</span></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">(Inner c)</span></span>&#123;</div><div class="line">        System.out.println(c);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        Outter o1 = <span class="keyword">new</span> Outter();</div><div class="line">        Outter o2 = <span class="keyword">new</span> Outter();</div><div class="line">        Outter.Inner i1 = o1.new Inner();</div><div class="line">        Outter.Inner i2 = o2.new Inner();</div><div class="line">        o1.foo(i2);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p><strong>非静态的内部类会持有外部类的一个隐式引用</strong>，上面在Outter类内部定义了Inner类，在后边main里创建了两个Inner实例，注意创建内部类的时候</p>
 <blockquote>
 <p>Outter.Inner i1 = o1.new Inner();</p>
@@ -372,8 +372,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/25/git/" rel="prev" title="git使用">
-                git使用 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/25/Hello/" rel="prev" title="Hello">
+                Hello <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
